@@ -1,12 +1,166 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<!--
-   RecipeData.plist
-   RecipeRally
-
-   Created by manh on 2025-04-11.
-   Copyright (c) 2025 ___ORGANIZATIONNAME___. All rights reserved.
--->
 <plist version="1.0">
-<dict/>
+<array>
+	<dict>
+		<key>cuisine</key>
+		<string>Italia</string>
+		<key>dishName</key>
+		<string>Pasta</string>
+		<key>stepToMake</key>
+		<string>1) Boil pasta. 2) Cook sauce with tomato, meat, etc. 3) Combine &amp; serve.</string>
+		<key>ingredient</key>
+		<array>
+			<string>Onion</string>
+			<string>Spaghetti</string>
+			<string>Tomato</string>
+		</array>
+		<key>picture</key>
+		<string>pasta.jpeg</string>
+	</dict>
+	<dict>
+		<key>cuisine</key>
+		<string>Indian</string>
+		<key>dishName</key>
+		<string>Butter Chicken</string>
+		<key>stepToMake</key>
+		<string>1) Marinate chicken in yogurt &amp; spices. 2) Cook in butter sauce with tomato. 3) Serve over rice.</string>
+		<key>ingredient</key>
+		<array>
+			<string>Yogurt</string>
+			<string>Butter</string>
+			<string>Chicken</string>
+			<string>Onion</string>
+			<string>Spaghetti</string>
+			<string>Tomato</string>
+		</array>
+		<key>picture</key>
+		<string>butterchicken.jpg</string>
+	</dict>
+	<dict>
+		<key>cuisine</key>
+		<string>Thai</string>
+		<key>dishName</key>
+		<string>Pad Thai</string>
+		<key>stepToMake</key>
+		<string>1) Soak rice noodles. 2) Stir-fry with egg, shrimp, bean sprouts &amp; sauce. 3) Garnish with peanuts.</string>
+		<key>ingredient</key>
+		<array>
+			<string>peanut</string>
+			<string>tofu</string>
+			<string>Tamarind</string>
+			<string>Rice Noodle</string>
+			<string>Bean Sprouts</string>
+			<string>Shrimp</string>
+			<string>Egg</string>
+		</array>
+		<key>picture</key>
+		<string>padthai.jpg</string>
+	</dict>
+	<dict>
+		<key>cuisine</key>
+		<string>American</string>
+		<key>dishName</key>
+		<string>Caesar Salad</string>
+		<key>stepToMake</key>
+		<string>1) Toss romaine with dressing &amp; croutons. 2) Top with parmesan. 3) Optionally add chicken.</string>
+		<key>ingredient</key>
+		<array>
+			<string>Onion</string>
+			<string>Lettuce</string>
+			<string>Parmesan</string>
+			<string>Croutons</string>
+		</array>
+		<key>picture</key>
+		<string>ceasarsalad.jpg</string>
+	</dict>
+	<dict>
+		<key>cuisine</key>
+		<string>American</string>
+		<key>dishName</key>
+		<string>Pancake</string>
+		<key>stepToMake</key>
+		<string>1) Cook pancake. 2) Top with Syrup. 3) Optionally add more Sugar.</string>
+		<key>ingredient</key>
+		<array>
+			<string>Butter</string>
+			<string>Flour</string>
+			<string>Maple Syrup</string>
+			<string>Sugar</string>
+		</array>
+		<key>picture</key>
+		<string>pancake.jpg</string>
+	</dict>
+	<dict>
+		<key>cuisine</key>
+		<string>Canadian</string>
+		<key>dishName</key>
+		<string>Poutine</string>
+		<key>stepToMake</key>
+		<string>1) Prepare Fries. 2) Top with cheese. 3) Add Gravy.</string>
+		<key>ingredient</key>
+		<array>
+			<string>Cheese</string>
+			<string>Gravy</string>
+			<string>Potato</string>
+			<string>Crispy Onion</string>
+		</array>
+		<key>picture</key>
+		<string>poutine.jpg</string>
+	</dict>
+	<dict>
+		<key>cuisine</key>
+		<string>Mexican</string>
+		<key>dishName</key>
+		<string>Taco</string>
+		<key>stepToMake</key>
+		<string>1) Toss romaine with dressing &amp; croutons. 2) Top with parmesan. 3) Optionally add chicken.</string>
+		<key>ingredient</key>
+		<array>
+			<string>Onion</string>
+			<string>Beef</string>
+			<string>Lettuce</string>
+			<string>Taco</string>
+			<string>Tomato</string>
+		</array>
+		<key>picture</key>
+		<string>taco.jpg</string>
+	</dict>
+	<dict>
+		<key>cuisine</key>
+		<string>Asian</string>
+		<key>dishName</key>
+		<string>Pho</string>
+		<key>stepToMake</key>
+		<string>1) Prepare Broth 2) Add Noodles. 3) Optionally add beef.</string>
+		<key>ingredient</key>
+		<array>
+			<string>Onion</string>
+			<string>Beef</string>
+			<string>Basil</string>
+			<string>Chicken</string>
+			<string>Bone</string>
+		</array>
+		<key>picture</key>
+		<string>pho.jpg</string>
+	</dict>
+	<dict>
+		<key>cuisine</key>
+		<string>American</string>
+		<key>dishName</key>
+		<string>Pizza</string>
+		<key>stepToMake</key>
+		<string>1) Prepare Pizza 2) Add Noodles. 3) Optionally add beef.</string>
+		<key>ingredient</key>
+		<array>
+			<string>Onion</string>
+			<string>Beef</string>
+			<string>Salami</string>
+			<string>Flour</string>
+			<string>Tomato</string>
+		</array>
+		<key>picture</key>
+		<string>pizza.jpg</string>
+	</dict>
+</array>
 </plist>

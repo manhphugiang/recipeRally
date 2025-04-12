@@ -2,7 +2,129 @@
 //  HomeViewController.swift
 //  RecipeRally
 //
-//  Created by manh on 2025-04-11.
+//  Created by manh on 2025-04-12.
 //
 
-import Foundation
+import UIKit
+import CoreData
+
+class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+
+    @IBOutlet weak var tableView: UITableView!
+    
+    // Array to hold fetched Recipe objects
+    var recipes: [Recipe] = []
+    
+    // Reference to Core Data context
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        // Preload recipes if needed (this will import from the plist)
+        preloadRecipesIfNeeded()
+        
+        // Fetch recipes from Core Data
+        fetchRecipes()
+    }
+    
+    // MARK: - Preloading Data
+    
+    func preloadRecipesIfNeeded() {
+        let request = NSFetchRequest<Recipe>(entityName: "Recipe")
+        request.fetchLimit = 1
+        
+        do {
+            let count = try context.count(for: request)
+            print("Current Recipe count: \(count)")
+            if count == 0 {
+                importRecipesFromPlist()
+            }
+        } catch {
+            print("Error checking recipe count: \(error)")
+        }
+    }
+    
+    func importRecipesFromPlist() {
+        guard let url = Bundle.main.url(forResource: "RecipeData", withExtension: "plist") else {
+            print("RecipeData.plist not found.")
+            return
+        }
+        do {
+            let data = try Data(contentsOf: url)
+            if let recipesArray = try PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [[String: Any]] {
+                print("Importing \(recipesArray.count) recipes.")
+                for recipeDict in recipesArray {
+                    let recipe = Recipe(context: context)
+                    recipe.dishName = recipeDict["dishName"] as? String
+                    recipe.cuisine = recipeDict["cuisine"] as? String
+                    recipe.stepToMake = recipeDict["stepToMake"] as? String
+                    recipe.picture = recipeDict["picture"] as? String
+                    
+                }
+                try context.save()
+                print("Imported \(recipesArray.count) recipes from plist.")
+            } else {
+                print("Failed to convert plist data.")
+            }
+        } catch {
+            print("Error importing recipes from plist: \(error)")
+        }
+    }
+    
+    // MARK: - Fetching Recipes
+    
+    func fetchRecipes() {
+        let request = NSFetchRequest<Recipe>(entityName: "Recipe")
+        do {
+            recipes = try context.fetch(request)
+            print("Fetched \(recipes.count) recipes.")
+            tableView.reloadData()
+        } catch {
+            print("Error fetching recipes: \(error)")
+        }
+    }
+    
+    // MARK: - UITableViewDataSource Methods
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return recipes.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // Make sure your storyboard cell identifier is set to "RecipeCell"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath)
+        let recipe = recipes[indexPath.row]
+        
+        cell.textLabel?.text = recipe.dishName ?? "No Dish Name"
+        
+        // Use the relationship 'ingredients' (NSSet) to display the ingredient names.
+        if let ingredientsSet = recipe.ingredients as? Set<Ingredient> {
+            let names = ingredientsSet.compactMap { $0.name }
+            cell.detailTextLabel?.text = (recipe.cuisine ?? "Unknown Cuisine") + " | " + names.joined(separator: ", ")
+        } else {
+            cell.detailTextLabel?.text = recipe.cuisine ?? "Unknown Cuisine"
+        }
+        
+        // Display image using the picture filename.
+        if let imageName = recipe.picture, let image = UIImage(named: imageName) {
+            cell.imageView?.image = image
+        } else {
+            cell.imageView?.image = UIImage(systemName: "photo")
+        }
+        
+        return cell
+    }
+    
+    // MARK: - UITableViewDelegate Methods
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedRecipe = recipes[indexPath.row]
+        print("Selected: \(selectedRecipe.dishName ?? "N/A")")
+        tableView.deselectRow(at: indexPath, animated: true)
+        // Optionally, perform segue here.
+    }
+}
