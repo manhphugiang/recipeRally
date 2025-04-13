@@ -8,6 +8,7 @@
         <attribute name="cuisine" optional="YES" attributeType="String"/>
         <attribute name="dishName" optional="YES" attributeType="String"/>
         <attribute name="ingredient" optional="YES" attributeType="Transformable"/>
+        <attribute name="mainIngredient" optional="YES" attributeType="String"/>
         <attribute name="picture" optional="YES" attributeType="String"/>
         <attribute name="stepToMake" optional="YES" attributeType="String"/>
         <relationship name="ingredients" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Ingredient" inverseName="recipes" inverseEntity="Ingredient"/>

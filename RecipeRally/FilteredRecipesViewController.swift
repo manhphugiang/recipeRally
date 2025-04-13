@@ -12,7 +12,7 @@ class FilteredRecipesViewController: UIViewController, UITableViewDataSource, UI
 
     @IBOutlet weak var tableView: UITableView!
     
-    // This array is populated from the previous screen with selected ingredient names.
+    // This array is populated from the selection screen with user-chosen ingredient names.
     var filteredIngredients: [String] = []
     
     // Array to hold the filtered Recipe objects.
@@ -36,21 +36,28 @@ class FilteredRecipesViewController: UIViewController, UITableViewDataSource, UI
         let request: NSFetchRequest<Recipe> = Recipe.fetchRequest()
         var predicates: [NSPredicate] = []
         
-        // Build a predicate for each selected ingredient.
+        // For each selected ingredient, build a predicate checking the new mainIngredient attribute.
         for ingredient in filteredIngredients {
-            let predicate = NSPredicate(format: "ANY ingredients.name ==[cd] %@", ingredient)
+            let predicate = NSPredicate(format: "mainIngredient ==[cd] %@", ingredient)
             predicates.append(predicate)
+            print("DEBUG: Adding predicate: mainIngredient ==[cd] \(ingredient)")
         }
         
-        // Combine with OR so a recipe with any matching ingredient is fetched.
         if !predicates.isEmpty {
             let compoundPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
             request.predicate = compoundPredicate
+            print("DEBUG: Combined Predicate: \(compoundPredicate)")
+        } else {
+            print("DEBUG: No filtered ingredients provided; fetching all recipes.")
         }
         
         do {
             filteredRecipes = try context.fetch(request)
             print("Fetched \(filteredRecipes.count) recipes matching: \(filteredIngredients)")
+            // Debug: Print mainIngredient for each fetched recipe.
+            for recipe in filteredRecipes {
+                print("DEBUG: Recipe '\(recipe.dishName ?? "Unnamed")' has mainIngredient: \(recipe.mainIngredient ?? "nil")")
+            }
             tableView.reloadData()
         } catch {
             print("Error fetching filtered recipes: \(error)")
@@ -64,21 +71,20 @@ class FilteredRecipesViewController: UIViewController, UITableViewDataSource, UI
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Make sure your storyboard cell identifier is "FilteredRecipeCell"
+        // Ensure your storyboard cell identifier is "FilteredRecipeCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: "FilteredRecipeCell", for: indexPath)
         let recipe = filteredRecipes[indexPath.row]
         
         cell.textLabel?.text = recipe.dishName ?? "No Dish Name"
         
-        // Use the relationship 'ingredients' to display ingredient names.
-        if let ingredientsSet = recipe.ingredients as? Set<Ingredient> {
-            let names = ingredientsSet.compactMap { $0.name }
-            cell.detailTextLabel?.text = (recipe.cuisine ?? "Unknown Cuisine") + " | " + names.joined(separator: ", ")
+        // Display cuisine and mainIngredient details.
+        if let mainIng = recipe.mainIngredient, !mainIng.isEmpty {
+            cell.detailTextLabel?.text = "\(recipe.cuisine ?? "Unknown Cuisine") | Main: \(mainIng)"
         } else {
             cell.detailTextLabel?.text = recipe.cuisine ?? "Unknown Cuisine"
         }
         
-        // Display image for the recipe.
+        // Display the recipe image.
         if let imageName = recipe.picture, let image = UIImage(named: imageName) {
             cell.imageView?.image = image
         } else {
@@ -90,27 +96,21 @@ class FilteredRecipesViewController: UIViewController, UITableViewDataSource, UI
     
     // MARK: - UITableViewDelegate Methods
     
+    // Remove performSegue here since the segue is connected directly from the cell.
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedRecipe = filteredRecipes[indexPath.row]
+        // For a cell-based segue, simply deselect the cell.
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        // Perform the segue using the identifier "showRecipeDetail" and pass the selected Recipe.
-   //     performSegue(withIdentifier: "showRecipeDetail", sender: selectedRecipe)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showRecipeDetail" {
-            // The user tapped a cell, so the system has stored the selected row
-            if let indexPath = tableView.indexPathForSelectedRow,
-               let detailVC = segue.destination as? RecipeDetailViewController {
-                
-                // Identify which recipe was tapped
-                let selectedRecipe = filteredRecipes[indexPath.row]
-                detailVC.recipe = selectedRecipe
-            }
+        if segue.identifier == "showRecipeDetail",
+           let detailVC = segue.destination as? RecipeDetailViewController,
+           let indexPath = tableView.indexPathForSelectedRow {
+            let selectedRecipe = filteredRecipes[indexPath.row]
+            detailVC.recipe = selectedRecipe
+            print("DEBUG: Passing recipe '\(selectedRecipe.dishName ?? "Unnamed")' to detail view.")
         }
     }
-
     
     // Optional: custom row height.
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

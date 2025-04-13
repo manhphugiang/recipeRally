@@ -66,7 +66,8 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     recipe.cuisine = recipeDict["cuisine"] as? String
                     recipe.stepToMake = recipeDict["stepToMake"] as? String
                     recipe.picture = recipeDict["picture"] as? String
-                    
+                    recipe.mainIngredient = recipeDict["mainIngredient"] as? String
+                              
                     // Set the transformable attribute "ingredient" with the array of strings.
                     if let ingredientArray = recipeDict["ingredient"] as? [String] {
                         recipe.ingredient = ingredientArray as NSArray

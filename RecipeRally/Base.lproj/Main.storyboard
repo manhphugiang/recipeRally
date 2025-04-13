@@ -351,7 +351,7 @@
             <objects>
                 <viewController storyboardIdentifier="RecipeDetailViewController" id="GtQ-AO-TDi" customClass="RecipeDetailViewController" customModule="RecipeRally" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ufs-WX-Jaz">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c3a-Ad-LiE">
@@ -451,7 +451,6 @@
                                 <buttonConfiguration key="configuration" style="filled" title="Find My Recipe"/>
                                 <connections>
                                     <action selector="findRecipeButtonTapped:" destination="HOe-hn-Gbp" eventType="touchUpInside" id="qhl-Qe-50i"/>
-                                    <segue destination="i3o-hE-Rs0" kind="show" id="Qpj-Oo-Nqm"/>
                                 </connections>
                             </button>
                         </subviews>

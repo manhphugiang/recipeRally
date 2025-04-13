@@ -8,7 +8,7 @@
 		<key>dishName</key>
 		<string>Pasta</string>
 		<key>stepToMake</key>
-		<string>1) Boil pasta. \n  2) Cook sauce with tomato, meat, etc. \n 3) Combine &amp; serve.</string>
+		<string>1) Boil pasta.   2) Cook sauce with tomato, meat, etc.  3) Combine &amp; serve.</string>
 		<key>ingredient</key>
 		<array>
 			<string>Onion</string>
@@ -17,6 +17,8 @@
 		</array>
 		<key>picture</key>
 		<string>pasta.jpeg</string>
+		<key>mainIngredient</key>
+		<string>Cheese</string>
 	</dict>
 	<dict>
 		<key>cuisine</key>
@@ -36,6 +38,8 @@
 		</array>
 		<key>picture</key>
 		<string>butterchicken.jpg</string>
+		<key>mainIngredient</key>
+		<string>Butter</string>
 	</dict>
 	<dict>
 		<key>cuisine</key>
@@ -56,6 +60,8 @@
 		</array>
 		<key>picture</key>
 		<string>padthai.jpg</string>
+		<key>mainIngredient</key>
+		<string>Egg</string>
 	</dict>
 	<dict>
 		<key>cuisine</key>
@@ -73,6 +79,8 @@
 		</array>
 		<key>picture</key>
 		<string>ceasarsalad.jpg</string>
+		<key>mainIngredient</key>
+		<string>onion</string>
 	</dict>
 	<dict>
 		<key>cuisine</key>
@@ -90,6 +98,8 @@
 		</array>
 		<key>picture</key>
 		<string>pancake.jpg</string>
+		<key>mainIngredient</key>
+		<string>Flour</string>
 	</dict>
 	<dict>
 		<key>cuisine</key>
@@ -107,6 +117,8 @@
 		</array>
 		<key>picture</key>
 		<string>poutine.jpg</string>
+		<key>mainIngredient</key>
+		<string>Potato</string>
 	</dict>
 	<dict>
 		<key>cuisine</key>
@@ -125,6 +137,8 @@
 		</array>
 		<key>picture</key>
 		<string>taco.jpg</string>
+		<key>mainIngredient</key>
+		<string>Tomato</string>
 	</dict>
 	<dict>
 		<key>cuisine</key>
@@ -143,6 +157,8 @@
 		</array>
 		<key>picture</key>
 		<string>pho.jpg</string>
+		<key>mainIngredient</key>
+		<string>Egg</string>
 	</dict>
 	<dict>
 		<key>cuisine</key>
@@ -161,6 +177,8 @@
 		</array>
 		<key>picture</key>
 		<string>pizza.jpg</string>
+		<key>mainIngredient</key>
+		<string>Tomato</string>
 	</dict>
 </array>
 </plist>
