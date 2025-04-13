@@ -95,17 +95,22 @@ class FilteredRecipesViewController: UIViewController, UITableViewDataSource, UI
         tableView.deselectRow(at: indexPath, animated: true)
         
         // Perform the segue using the identifier "showRecipeDetail" and pass the selected Recipe.
-        performSegue(withIdentifier: "showRecipeDetail", sender: selectedRecipe)
+   //     performSegue(withIdentifier: "showRecipeDetail", sender: selectedRecipe)
     }
     
-    // Prepare for segue: pass the selected Recipe to the RecipeDetailViewController.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showRecipeDetail",
-           let detailVC = segue.destination as? RecipeDetailViewController,
-           let selectedRecipe = sender as? Recipe {
-            detailVC.recipe = selectedRecipe
+        if segue.identifier == "showRecipeDetail" {
+            // The user tapped a cell, so the system has stored the selected row
+            if let indexPath = tableView.indexPathForSelectedRow,
+               let detailVC = segue.destination as? RecipeDetailViewController {
+                
+                // Identify which recipe was tapped
+                let selectedRecipe = filteredRecipes[indexPath.row]
+                detailVC.recipe = selectedRecipe
+            }
         }
     }
+
     
     // Optional: custom row height.
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

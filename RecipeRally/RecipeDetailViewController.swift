@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import CoreData  // Important if you're referencing NSManagedObject subclasses
+import CoreData  // Needed for NSManagedObject subclasses
 
 class RecipeDetailViewController: UIViewController {
     
@@ -15,27 +15,30 @@ class RecipeDetailViewController: UIViewController {
     @IBOutlet weak var stepsTextView: UITextView!
     @IBOutlet weak var ingredientsLabel: UILabel!
     
-    // This is set by the FilteredRecipesViewController
+    // This property is set by the previous view controller (via segue)
     var recipe: Recipe?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let recipe = recipe else { return }
+        guard let recipe = recipe else {
+            print("DEBUG: No recipe was passed to RecipeDetailViewController!")
+            return
+        }
         
-        // Display the dish name
+        // Display the dish name and steps
         dishNameLabel.text = recipe.dishName
-        
-        // Display the steps
         stepsTextView.text = recipe.stepToMake
         
-        // Display the ingredients as a comma-separated list
-        // Convert the NSSet? to a Set<Ingredient>, then map each Ingredient’s name.
-        if let ingredientsSet = recipe.ingredients as? Set<Ingredient> {
-            let ingredientNames = ingredientsSet.compactMap { $0.name }
-            ingredientsLabel.text = "Ingredients: " + ingredientNames.joined(separator: ", ")
+        // Display ingredients:
+        // Since you're not using a relationship, we expect recipe.ingredient to store an NSArray of Strings.
+        if let ingredientArray = recipe.ingredient as? [String] {
+            let ingredientList = ingredientArray.joined(separator: "\n")
+            ingredientsLabel.text = "Ingredients:\n\n" + ingredientList
+            print("DEBUG: Ingredients found: \(ingredientArray)")
         } else {
             ingredientsLabel.text = "Ingredients: N/A"
+            print("DEBUG: No ingredients found in recipe. ('ingredient' attribute is nil or not an array of strings)")
         }
         
         // Display the image

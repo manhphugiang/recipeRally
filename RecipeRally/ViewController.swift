@@ -72,34 +72,33 @@ class ViewController: UIViewController, LoginButtonDelegate {
     
     // MARK: - Actions for Username-Only Login Flow
     @IBAction func loginButtonTapped(_ sender: UIButton) {
-        let typedUsername = usernameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        guard !typedUsername.isEmpty else {
-            print("Username cannot be empty.")
-            return
-        }
-        if userExists(typedUsername) {
-            print("User exists. Logging in.")
+        // Use a guard statement with an alert if the username is empty.
+               guard let username = usernameTextField.text, !username.isEmpty else {
+                   let alert = UIAlertController(title: "Missing Username",
+                                                 message: "Please enter your username.",
+                                                 preferredStyle: .alert)
+                   alert.addAction(UIAlertAction(title: "OK", style: .default))
+                   present(alert, animated: true)
+                   return
+               }
+               
+               // Validate the username. Replace this with your actual validation logic.
+               guard userExists(username) else {
+                   let alert = UIAlertController(title: "Username Not Found",
+                                                 message: "The username you entered was not found. Please try again.",
+                                                 preferredStyle: .alert)
+                   alert.addAction(UIAlertAction(title: "OK", style: .default))
+                   present(alert, animated: true)
+                   return
+               }
+               
+               // If validation succeeds, proceed with login flow.
+               print("Login successful!")
+               // Optionally, perform a segue to the next screen:
             redirectToMainTabBar()
-        } else {
-            print("User does not exist. Please create an account first.")
-        }
-    }
+           }
     
-    @IBAction func createAccountButtonTapped(_ sender: UIButton) {
-        let typedUsername = usernameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        guard !typedUsername.isEmpty else {
-            print("Username cannot be empty.")
-            return
-        }
-        if userExists(typedUsername) {
-            print("User already exists, choose a different username.")
-        } else {
-            createUser(typedUsername)
-            print("New user created, logging in.")
-            redirectToMainTabBar()
-        }
-    }
-    
+
     // MARK: - Core Data Helpers
     private func handleUsernameLogin(_ username: String) {
         if !userExists(username) {

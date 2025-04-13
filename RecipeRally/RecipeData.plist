@@ -8,7 +8,7 @@
 		<key>dishName</key>
 		<string>Pasta</string>
 		<key>stepToMake</key>
-		<string>1) Boil pasta. 2) Cook sauce with tomato, meat, etc. 3) Combine &amp; serve.</string>
+		<string>1) Boil pasta. \n  2) Cook sauce with tomato, meat, etc. \n 3) Combine &amp; serve.</string>
 		<key>ingredient</key>
 		<array>
 			<string>Onion</string>

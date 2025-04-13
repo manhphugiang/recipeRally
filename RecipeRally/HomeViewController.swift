@@ -40,8 +40,11 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         do {
             let count = try context.count(for: request)
             print("Current Recipe count: \(count)")
+            // If count is zero, import recipes
             if count == 0 {
                 importRecipesFromPlist()
+            } else {
+                print("Data already exists in store. To test updated import, delete the app or clear the store.")
             }
         } catch {
             print("Error checking recipe count: \(error)")
@@ -64,6 +67,13 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     recipe.stepToMake = recipeDict["stepToMake"] as? String
                     recipe.picture = recipeDict["picture"] as? String
                     
+                    // Set the transformable attribute "ingredient" with the array of strings.
+                    if let ingredientArray = recipeDict["ingredient"] as? [String] {
+                        recipe.ingredient = ingredientArray as NSArray
+                        print("DEBUG: For recipe \(recipe.dishName ?? "Unnamed"), imported ingredients: \(ingredientArray)")
+                    } else {
+                        print("DEBUG: No ingredient array found for recipe \(recipe.dishName ?? "Unnamed")")
+                    }
                 }
                 try context.save()
                 print("Imported \(recipesArray.count) recipes from plist.")
@@ -82,6 +92,14 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         do {
             recipes = try context.fetch(request)
             print("Fetched \(recipes.count) recipes.")
+            // For each fetched recipe, log the ingredients value:
+            for recipe in recipes {
+                if let ing = recipe.ingredient as? [String] {
+                    print("DEBUG: Recipe '\(recipe.dishName ?? "Unnamed")' has ingredients: \(ing)")
+                } else {
+                    print("DEBUG: Recipe '\(recipe.dishName ?? "Unnamed")' has no ingredients (or wrong format).")
+                }
+            }
             tableView.reloadData()
         } catch {
             print("Error fetching recipes: \(error)")
@@ -95,16 +113,15 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Make sure your storyboard cell identifier is set to "RecipeCell"
+        // Make sure your storyboard cell's identifier is set to "RecipeCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell", for: indexPath)
         let recipe = recipes[indexPath.row]
         
         cell.textLabel?.text = recipe.dishName ?? "No Dish Name"
         
-        // Use the relationship 'ingredients' (NSSet) to display the ingredient names.
-        if let ingredientsSet = recipe.ingredients as? Set<Ingredient> {
-            let names = ingredientsSet.compactMap { $0.name }
-            cell.detailTextLabel?.text = (recipe.cuisine ?? "Unknown Cuisine") + " | " + names.joined(separator: ", ")
+        // Display cuisine and ingredients (using transformable attribute "ingredient")
+        if let ingredientArray = recipe.ingredient as? [String] {
+            cell.detailTextLabel?.text = (recipe.cuisine ?? "Unknown Cuisine") + " | " + ingredientArray.joined(separator: ", ")
         } else {
             cell.detailTextLabel?.text = recipe.cuisine ?? "Unknown Cuisine"
         }
@@ -125,6 +142,17 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let selectedRecipe = recipes[indexPath.row]
         print("Selected: \(selectedRecipe.dishName ?? "N/A")")
         tableView.deselectRow(at: indexPath, animated: true)
-        // Optionally, perform segue here.
+        // If you're using a cell-based storyboard segue, the segue will be triggered automatically.
+    }
+    
+    // Prepare for segue: pass the selected Recipe to RecipeDetailViewController.
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showRecipeDetail",
+           let detailVC = segue.destination as? RecipeDetailViewController,
+           let indexPath = tableView.indexPathForSelectedRow {
+            let selectedRecipe = recipes[indexPath.row]
+            detailVC.recipe = selectedRecipe
+            print("DEBUG: Passing recipe \(selectedRecipe.dishName ?? "Unnamed") to detail view.")
+        }
     }
 }
