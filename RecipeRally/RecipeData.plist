@@ -20,6 +20,162 @@
 		<key>mainIngredient</key>
 		<string>Cheese</string>
 	</dict>
+    <dict>
+        <key>cuisine</key>
+        <string>Italia</string>
+        <key>dishName</key>
+        <string>Lasagna</string>
+        <key>stepToMake</key>
+        <string>1) Layer pasta, sauce, and cheese. 2) Bake until golden. 3) Let cool and serve.</string>
+        <key>ingredient</key>
+        <array>
+            <string>Tomato Sauce</string>
+            <string>Ground Beef</string>
+            <string>Ricotta</string>
+            <string>Lasagna Sheets</string>
+            <string>Mozzarella</string>
+        </array>
+        <key>picture</key>
+        <string>lasagna.jpg</string>
+        <key>mainIngredient</key>
+        <string>Tomato</string>
+    </dict>
+    <dict>
+        <key>cuisine</key>
+        <string>Italia</string>
+        <key>dishName</key>
+        <string>Risotto</string>
+        <key>stepToMake</key>
+        <string>1) Sauté onions. 2) Add rice and broth gradually. 3) Stir until creamy.</string>
+        <key>ingredient</key>
+        <array>
+            <string>Arborio Rice</string>
+            <string>Onion</string>
+            <string>Parmesan</string>
+            <string>White Wine</string>
+            <string>Butter</string>
+        </array>
+        <key>picture</key>
+        <string>risotto.jpg</string>
+        <key>mainIngredient</key>
+        <string>Cheese</string>
+    </dict>
+    <dict>
+        <key>cuisine</key>
+        <string>Italia</string>
+        <key>dishName</key>
+        <string>Margherita Pizza</string>
+        <key>stepToMake</key>
+        <string>1) Prepare dough. 2) Add sauce, cheese, basil. 3) Bake.</string>
+        <key>ingredient</key>
+        <array>
+            <string>Dough</string>
+            <string>Tomato Sauce</string>
+            <string>Mozzarella</string>
+            <string>Basil</string>
+        </array>
+        <key>picture</key>
+        <string>margheritapizza.jpg</string>
+        <key>mainIngredient</key>
+        <string>Tomato</string>
+    </dict>
+    <dict>
+        <key>cuisine</key>
+        <string>Italia</string>
+        <key>dishName</key>
+        <string>Gnocchi</string>
+        <key>stepToMake</key>
+        <string>1) Boil potatoes. 2) Mix with flour to form dough. 3) Boil and serve with sauce.</string>
+        <key>ingredient</key>
+        <array>
+            <string>Potato</string>
+            <string>Flour</string>
+            <string>Salt</string>
+            <string>Parmesan</string>
+        </array>
+        <key>picture</key>
+        <string>gnocchi.jpg</string>
+        <key>mainIngredient</key>
+        <string>Potato</string>
+    </dict>
+    <dict>
+        <key>cuisine</key>
+        <string>Canadian</string>
+        <key>dishName</key>
+        <string>Butter Tarts</string>
+        <key>stepToMake</key>
+        <string>1) Prepare pastry shells. 2) Fill with buttery mixture. 3) Bake until golden.</string>
+        <key>ingredient</key>
+        <array>
+            <string>Butter</string>
+            <string>Sugar</string>
+            <string>Egg</string>
+            <string>Raisins</string>
+            <string>Pastry Shell</string>
+        </array>
+        <key>picture</key>
+        <string>buttertarts.jpg</string>
+        <key>mainIngredient</key>
+        <string>Butter</string>
+    </dict>
+    <dict>
+        <key>cuisine</key>
+        <string>Canadian</string>
+        <key>dishName</key>
+        <string>Nanaimo Bars</string>
+        <key>stepToMake</key>
+        <string>1) Make crumb base. 2) Layer custard filling. 3) Top with chocolate and chill.</string>
+        <key>ingredient</key>
+        <array>
+            <string>Graham Cracker</string>
+            <string>Custard Powder</string>
+            <string>Chocolate</string>
+            <string>Coconut</string>
+            <string>Butter</string>
+        </array>
+        <key>picture</key>
+        <string>nanaimobar.jpg</string>
+        <key>mainIngredient</key>
+        <string>Chocolate</string>
+    </dict>
+    <dict>
+        <key>cuisine</key>
+        <string>Canadian</string>
+        <key>dishName</key>
+        <string>Tourtière</string>
+        <key>stepToMake</key>
+        <string>1) Prepare meat filling. 2) Place in pie crust. 3) Bake until golden brown.</string>
+        <key>ingredient</key>
+        <array>
+            <string>Ground Pork</string>
+            <string>Onion</string>
+            <string>Spices</string>
+            <string>Pie Crust</string>
+        </array>
+        <key>picture</key>
+        <string>tourtiere.jpg</string>
+        <key>mainIngredient</key>
+        <string>Ground Pork</string>
+    </dict>
+    <dict>
+        <key>cuisine</key>
+        <string>Canadian</string>
+        <key>dishName</key>
+        <string>Maple Salmon</string>
+        <key>stepToMake</key>
+        <string>1) Marinate salmon in maple glaze. 2) Bake or grill. 3) Serve with lemon.</string>
+        <key>ingredient</key>
+        <array>
+            <string>Salmon</string>
+            <string>Maple Syrup</string>
+            <string>Lemon</string>
+            <string>Garlic</string>
+        </array>
+        <key>picture</key>
+        <string>maplesalmon.jpg</string>
+        <key>mainIngredient</key>
+        <string>Salmon</string>
+    </dict>
 	<dict>
 		<key>cuisine</key>
 		<string>Indian</string>
