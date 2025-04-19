@@ -11,14 +11,13 @@ class CuisineSelectionViewController: UIViewController {
 
     // MARK: - IBOutlets
     @IBOutlet weak var canadianButton: UIButton!
-    @IBOutlet weak var italianButton: UIButton!  // You can keep this if needed
+    @IBOutlet weak var italianButton: UIButton!
     var selectedCuisine: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Select a Cuisine"
-        // (Assuming you've already set constraints, backgrounds, images, etc. in your storyboard)
     }
     
     // MARK: - IBActions
@@ -30,8 +29,7 @@ class CuisineSelectionViewController: UIViewController {
     }
     
     @IBAction func italianButtonTapped(_ sender: UIButton) {
-        // For illustration – if you want to handle the Italian button,
-        // pass the exact string as stored in your data, e.g., "Italia".
+        // When Canadian is tapped, pass the string "Italia"
         selectedCuisine = "Italia"
 
     }

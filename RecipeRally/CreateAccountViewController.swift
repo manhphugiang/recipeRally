@@ -16,31 +16,25 @@ class CreateAccountViewController: UIViewController {
     @IBOutlet var usernameTextField: UITextField!
     @IBOutlet var signUpButton: UIButton!
     
-    // Get the Core Data context from AppDelegate.
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Optionally customize UI elements here (for example, button styles).
     }
     
     // MARK: - IBActions
     @IBAction func signUpButtonTapped(_ sender: UIButton) {
-        // Trim any extra whitespace from the entered username.
         guard let username = usernameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !username.isEmpty else {
             showAlert(withMessage: "Please enter a username.")
             return
         }
         
-        // Check if the username already exists.
         if userExists(username) {
             showAlert(withMessage: "User already exists, please choose a different username.")
         } else {
             // Create a new user.
             createUser(username)
-            // Optionally show a success message or automatically log the user in.
-            // For this example, we simply return to the login screen.
             self.navigationController?.popViewController(animated: true)
         }
     }
@@ -49,7 +43,6 @@ class CreateAccountViewController: UIViewController {
     
     private func userExists(_ username: String) -> Bool {
         let request: NSFetchRequest<User> = User.fetchRequest()
-        // Make sure 'User' is generated as an NSManagedObject subclass from your Core Data Model.
         request.predicate = NSPredicate(format: "username == %@", username)
         
         do {
@@ -62,7 +55,7 @@ class CreateAccountViewController: UIViewController {
     }
     
     private func createUser(_ username: String) {
-        let newUser = User(context: context) // 'User' must be generated from your Core Data model.
+        let newUser = User(context: context)
         newUser.username = username
         
         do {

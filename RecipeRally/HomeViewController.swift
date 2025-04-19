@@ -17,13 +17,14 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     // Reference to Core Data context
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
+     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.delegate = self
         tableView.dataSource = self
-        
+        tableView.rowHeight = 100
+
         // Preload recipes if needed (this will import from the plist)
         preloadRecipesIfNeeded()
         
@@ -127,12 +128,17 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             cell.detailTextLabel?.text = recipe.cuisine ?? "Unknown Cuisine"
         }
         
-        // Display image using the picture filename.
         if let imageName = recipe.picture, let image = UIImage(named: imageName) {
             cell.imageView?.image = image
         } else {
             cell.imageView?.image = UIImage(systemName: "photo")
         }
+
+        // Set a fixed size for the imageView
+        let imageSize = CGSize(width: 80, height: 80)
+        cell.imageView?.frame = CGRect(origin: .zero, size: imageSize)
+        cell.imageView?.contentMode = .scaleAspectFill
+        cell.imageView?.clipsToBounds = true
         
         return cell
     }

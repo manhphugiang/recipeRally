@@ -39,7 +39,6 @@ class SelectIngredientViewController: UIViewController, UICollectionViewDataSour
         // Set a visible background color so you can see the collection view's frame
         collectionView.backgroundColor = .systemGray5
         
-        // Configure layout for a 3-column grid
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.minimumInteritemSpacing = 8
             layout.minimumLineSpacing = 8
@@ -62,7 +61,6 @@ class SelectIngredientViewController: UIViewController, UICollectionViewDataSour
         let option = ingredientOptions[indexPath.row]
         cell.ingredientLabel.text = option.displayName
         
-        // Debug block: Try to load the image and print log messages
         if let image = UIImage(named: option.imageName) {
             cell.ingredientImageView.image = image
             print("Loaded image for \(option.imageName)")

@@ -12,13 +12,10 @@ class FilteredRecipesViewController: UIViewController, UITableViewDataSource, UI
 
     @IBOutlet weak var tableView: UITableView!
     
-    // This array is populated from the selection screen with user-chosen ingredient names.
     var filteredIngredients: [String] = []
     
-    // Array to hold the filtered Recipe objects.
     var filteredRecipes: [Recipe] = []
     
-    // Reference to Core Data context.
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
@@ -54,10 +51,6 @@ class FilteredRecipesViewController: UIViewController, UITableViewDataSource, UI
         do {
             filteredRecipes = try context.fetch(request)
             print("Fetched \(filteredRecipes.count) recipes matching: \(filteredIngredients)")
-            // Debug: Print mainIngredient for each fetched recipe.
-            for recipe in filteredRecipes {
-                print("DEBUG: Recipe '\(recipe.dishName ?? "Unnamed")' has mainIngredient: \(recipe.mainIngredient ?? "nil")")
-            }
             tableView.reloadData()
         } catch {
             print("Error fetching filtered recipes: \(error)")
